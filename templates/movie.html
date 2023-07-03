@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Movie Details - {{ movie[1] }}</title>
+{% endblock %}
+{% block content %}
+
+
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <div class="card mb-3">
+            <div class="card-header bg-transparent"><h3>{{ movie[1] }}</h3></div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <p class="text-right font-weight-bold">Title:</p>
+                        <p class="text-right">Year:</p>
+                        <p class="text-right">Rating:</p>
+                        <p class="text-right">Duration:</p>
+                        <p class="text-right">Genre:</p>
+                    </div>
+                    <div class="col-6">
+                        <p>{{ movie[1] }}</p>
+                        <p>{{ movie[2] }}</p>
+                        <p>{{ movie[3] }}</p>
+                        <p>{{ movie[4] }}</p>
+                        <p>{{ movie[5] }}</p>
+                    </div>
+                </div>
+            </div>
+                <div class="card-footer">
+<!--                    <span class="">-->
+                        <a href="{{ url_for('modify_movie_page', film_id=movie[0]) }}" type="button" class="btn btn-primary">Modify</a>
+<!--                        <button type="button" class="btn btn-danger">Delete</button>-->
+                        <form method="post" action="{{ url_for('delete_movie', film_id=movie[0]) }}">
+                <input type="submit" class="btn btn-danger" value="Delete"
+                onclick="return confirm('Are you sure you want to delete this movie?')"
+                />
+            </form>
+<!--                    </span>-->
+                </div>
+            </div>
+    </div>
+    <div class="col-3"></div>
+</div>
+{% endblock %}
