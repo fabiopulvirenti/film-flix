@@ -1,9 +1,28 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    <title>Welcome Page</title>
+<title>Welcome to FilmFlix</title>
 {% endblock %}
 
 {% block content %}
-     <p>Welcome</p>
+<div class="position-relative welcome-page">
+    <div class="position-absolute top-50 start-50 translate-middle" style="width: 100%">
+        <div class="row" style="width: 100%">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <form action="{{ url_for('give_me_the_movie_by_title') }}" class="mt-4" method="post">
+                    <div class="input-group">
+                        <input aria-describedby="search-addon" aria-label="Search" class="form-control" name="search_string"
+                               placeholder="Search for a Movie" role="searchbox" type="search"/>
+                        <button class="btn btn-secondary" type="submit"><i
+                                class="fa-solid fa-magnifying-glass fa-fade fa-xl"></i></button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+</div>
 {% endblock %}
+
+

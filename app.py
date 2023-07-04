@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, url_for, redirect
 from flask_bootstrap import Bootstrap5
 
-from database_ops import retrieve_all_movies, retrieve_one_movie, insert_movie, delete_record, update_record
+from database_ops import retrieve_all_movies, retrieve_one_movie, insert_movie, delete_record, update_record, \
+     retrieve_one_movie_by_title
 
 app = Flask(__name__)
 bootstrap = Bootstrap5(app)
@@ -43,6 +44,15 @@ def modify_movie_page(film_id):
 
     return render_template('modify_movie.html', movie=movie_selected)
 
+@app.route("/films/search", methods=["POST"])
+def give_me_the_movie_by_title():
+    search_string = request.form['search_string']
+    title_selected=retrieve_one_movie_by_title(search_string)
+
+    return render_template('title_selected.html',movies=title_selected)
+    # return redirect(url_for('get_all_films_page'))
+
+
 
 @app.route("/films/<int:film_id>/edit", methods=["POST"])
 def modify_movie(film_id):
@@ -77,16 +87,6 @@ def get_one_film_by_id_page(film_id):
 @app.route("/about",methods=["GET"])
 def about_page():
     return render_template('about.html')
-
-
-
-
-
-
-
-
-
-
 
 
 @app.route("/api/films/", methods=["GET"])

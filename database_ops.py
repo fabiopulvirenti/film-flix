@@ -44,6 +44,14 @@ def retrieve_one_movie(id):
     return one_record
 
 
+def retrieve_one_movie_by_title(title):
+    connector = sql_handling("filmflix.db")
+    list_of_titles = connector.select_data(f"SELECT * FROM tblFilms WHERE title LIKE '%{title}%' ")
+
+    return list_of_titles
+
+
+
 def insert_movie(title,yearReleased,rating,duration,genre):
     connector = sql_handling("filmflix.db")
 
